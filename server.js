@@ -18,14 +18,14 @@ app.use(cors({origin: '*'})); //For FCC testing purposes only
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(helmet.contentSecurityPolicy(
-  {
-  directives : {
-    defaultSrc: ["'self'"],
-    scriptSrc: ["'self'", 'CSS']
-    }
-  }
-));
+app.use(helmet({
+  contentSecurityPolicy: {
+      directives: {
+        "script-src":['self',"css"],
+      },
+      reportOnly:true
+    },
+}))
 app.use(helmet());
 
 //Index page (static HTML)
