@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet({
   contentSecurityPolicy: {
       directives: {
-        "script-src":["/public/script.js","/public/style.css"],
+        "script-src":["script.js","style.css"],
       },
       reportOnly:true
     },
