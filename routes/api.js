@@ -25,18 +25,18 @@ module.exports = function (app) {
               number_likes1-=1;
             }
               res.json({
-                "stockData":[{"stock":data1.symbol,"price":data1.latestPrice,"rel_likes":number_likes1},{"stock":data2.symbol,"price":data2.latestPrice,"rel_likes":number_likes1}]
+                "stockData":[{"stock":NASDAQ_symbol[0],"price":data1.latestPrice,"rel_likes":number_likes1},{"stock":NASDAQ_symbol[1],"price":data2.latestPrice,"rel_likes":number_likes1}]
                });
           })
         });
         return;
       }
-      fetch(`https://stock-price-checker-proxy.freecodecamp.rocks/v1/stock/${NASDAQ_symbol[0]}/quote`)
+      fetch(`https://stock-price-checker-proxy.freecodecamp.rocks/v1/stock/${NASDAQ_symbol}/quote`)
         .then(res => res.json())
         .then(data => {
        res.json({
         "stockData":{
-          "stock":data.symbol,
+          "stock":NASDAQ_symbol,
           "price":data.latestPrice,
           "likes":number_likes
            }
