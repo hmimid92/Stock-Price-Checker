@@ -10,10 +10,10 @@ suite('Functional Tests', function() {
       chai
       .request(server)
       .keepOpen()
-      .get('/api/stock-prices?stock=GOOG')
-    //   .query(
-    //     {stock: 'GOOG'
-    //     })
+      .get('/api/stock-prices/')
+      .query(
+        {stock: 'GOOG'
+        })
       .end(function (err, res) {
         assert.equal(res.status, 200);
         assert.equal(res.body['stockData'].stock,'GOOG');
@@ -25,10 +25,12 @@ suite('Functional Tests', function() {
         chai
         .request(server)
         .keepOpen()
-        .get('/api/stock-prices?stock=GOOG&like=true')
-      //   .query(
-      //     {stock: 'GOOG'
-      //     })
+        .get('/api/stock-prices/')
+        .query(
+          {
+            stock: 'GOOG',
+            like: true
+          })
         .end(function (err, res) {
           assert.equal(res.status, 200);
           assert.equal(res.body['stockData'].likes,1);
@@ -40,10 +42,11 @@ suite('Functional Tests', function() {
         chai
         .request(server)
         .keepOpen()
-        .get('/api/stock-prices?stock=GOOG&stock=GOOG&like=true')
-      //   .query(
-      //     {stock: 'GOOG'
-      //     })
+        .get('/api/stock-prices/')
+        .query(
+          {stock: ['GOOG','GOOG'],
+           like: true
+          })
         .end(function (err, res) {
           assert.equal(res.status, 200);
           assert.isArray(res.body['stockData']);
@@ -55,10 +58,10 @@ suite('Functional Tests', function() {
         chai
         .request(server)
         .keepOpen()
-        .get('/api/stock-prices?stock=GOOG&stock=MSFT')
-      //   .query(
-      //     {stock: 'GOOG'
-      //     })
+        .get('/api/stock-prices/')
+        .query(
+          {stock: ['GOOG','MSFT'],
+          })
         .end(function (err, res) {
           assert.equal(res.status, 200);
           assert.equal(res.body['stockData'][0].stock,'GOOG');
@@ -71,11 +74,13 @@ suite('Functional Tests', function() {
         chai
         .request(server)
         .keepOpen()
-        .get('/api/stock-prices?stock=GOOG&stock=MSFT&like=true')
-      //   .query(
-      //     {stock: 'GOOG'
-      //     })
+        .get('/api/stock-prices/')
+        .query(
+          {stock: ['GOOG','MSFT'],
+           like: true
+          })
         .end(function (err, res) {
+
           assert.equal(res.status, 200);
           assert.equal(res.body['stockData'][0].stock,'GOOG');
           assert.equal(res.body['stockData'][1].stock,'MSFT');
