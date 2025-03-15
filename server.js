@@ -26,6 +26,7 @@ app.use(helmet.contentSecurityPolicy(
     }
   }
 ));
+app.use(helmet());
 
 //Index page (static HTML)
 app.route('/')
